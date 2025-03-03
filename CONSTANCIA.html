@@ -164,7 +164,7 @@
           return; // Terminar la función si el campo de búsqueda está vacío
       }
 
-      fetch('https://raw.githubusercontent.com/tu-usuario/tu-repositorio/main/empleados.csv') // Cambia la URL por la de tu CSV
+      fetch('https://raw.githubusercontent.com/jesymca/talento_humano/main/constancias_trabajo.csv') // Cambia la URL por la de tu CSV
           .then(response => response.text())
           .then(csvData => {
               const resultados = [];
@@ -208,7 +208,7 @@
   }
 
   function generarConstancia(cedula) {
-      fetch('https://raw.githubusercontent.com/tu-usuario/tu-repositorio/main/empleados.csv') // Cambia la URL por la de tu CSV
+      fetch('https://raw.githubusercontent.com/jesymca/talento_humano/main/constancias_trabajo.csv') // Cambia la URL por la de tu CSV
           .then(response => response.text())
           .then(csvData => {
               const rows = csvData.split('\n');
