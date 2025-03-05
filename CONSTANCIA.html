@@ -590,7 +590,7 @@ const Url = ofuscado();
                     const textoConstancia = `
     Quien suscribe, Directora de Gestión de Talento Humano de la Universidad Politécnica Territorial Puerto Cabello, 
     a través del presente hace constar que el ciudadano (a) {${empleadoEncontrado.Nombre}}, Titular de la Cédula de Identidad No. {${empleadoEncontrado.Cedula}}, presta servicio en esta institución como miembro del personal {${empleadoEncontrado.TipoPersonal}}, categoría {${empleadoEncontrado.Categoria}} a {${empleadoEncontrado.Tiempo}}, 
-    desde el {${empleadoEncontrado.Desde}}, percibiendo una remuneración mensual de: {${NumeroALetras(empleadoEncontrado.RemuneracionMensual)}}  {${empleadoEncontrado.RemuneracionMensual}} Bs.
+    desde el {${empleadoEncontrado.Desde}}, percibiendo una remuneración mensual de: {${NumeroALetras(empleadoEncontrado.RemuneracionMensual)}} (Bs {${empleadoEncontrado.RemuneracionMensual}}).
 `;
 
                     // Agregar el texto al SVG
@@ -603,6 +603,7 @@ const Url = ofuscado();
         })
         .catch(error => console.error("Error al cargar el CSV:", error));
 }
+
 
 
 function agregarTextoMultilinea(texto, x, y, maxWidth, contenedor) {
@@ -624,27 +625,61 @@ function agregarTextoMultilinea(texto, x, y, maxWidth, contenedor) {
     // Verificar si la palabra contiene una llave de cierre }
     if (palabra.includes('}') && dentroDeLlaves) {
       dentroDeLlaves = false;
-      contenidoLlaves += ' ' + palabra.replace('}', ''); // Agregar la palabra sin la llave de cierre
-      // La lógica de salto de línea se hace *antes* de agregar a la línea actual
-      if ((lineaActual + ` {${contenidoLlaves}} `).length * 4 > maxWidth) {
-        lineas.push(lineaActual.trim());
-        lineaActual = ` {${contenidoLlaves}} `;
-      } else {
-        lineaActual += ` {${contenidoLlaves}} `;
+      contenidoLlaves += ' ' + palabra.replace('}', '');
+
+      // Si el contenido entre llaves es muy largo, dividirlo en múltiples líneas
+      let palabrasLlaves = contenidoLlaves.split(' ');
+      let lineaLlavesActual = '';
+
+      palabrasLlaves.forEach(palabraLlave => {
+        if ((lineaLlavesActual + palabraLlave + ' ').length * 6 > maxWidth) {
+          // Lógica para agregar negrita al final y al principio de líneas cortadas
+          let lineaConNegrita = ` {${lineaLlavesActual.trim()}} `;
+
+          if (lineaActual) {
+            // Insertar al final de la línea existente
+            if ((lineaActual + lineaConNegrita).length * 11 > maxWidth) {
+              lineas.push(lineaActual.trim());
+              lineaActual = lineaConNegrita;
+            } else {
+              lineaActual += lineaConNegrita;
+            }
+          } else {
+            // Insertar en una nueva línea
+            lineas.push(lineaConNegrita.trim());
+            lineaActual = "";
+          }
+
+          lineaLlavesActual = palabraLlave + ' ';
+        } else {
+          lineaLlavesActual += palabraLlave + ' ';
+        }
+      });
+
+      // Agregar la última parte del contenido entre llaves
+      if (lineaLlavesActual) {
+        let lineaConNegrita = ` {${lineaLlavesActual.trim()}} `;
+        if ((lineaActual + lineaConNegrita).length * 5 > maxWidth) {
+          lineas.push(lineaActual.trim());
+          lineaActual = lineaConNegrita;
+        } else {
+          lineaActual += lineaConNegrita;
+        }
       }
-      contenidoLlaves = ''; // Reiniciar el contenido de las llaves
-      return; // Continuar con la siguiente palabra
+
+      contenidoLlaves = '';
+      return;
     }
 
     // Si estamos dentro de llaves, acumular el contenido
     if (dentroDeLlaves) {
       contenidoLlaves += ' ' + palabra;
-      return; // Continuar con la siguiente palabra
+      return;
     }
 
     // Si no estamos dentro de llaves, procesar la palabra normalmente
     const pruebaLinea = lineaActual + palabra + ' ';
-    if (pruebaLinea.length * 4 <= maxWidth) { // Ajusta el factor 4 según el tamaño de la fuente
+    if (pruebaLinea.length * 4 <= maxWidth) {
       lineaActual = pruebaLinea;
     } else {
       lineas.push(lineaActual.trim());
@@ -661,19 +696,19 @@ function agregarTextoMultilinea(texto, x, y, maxWidth, contenedor) {
   lineas.forEach((linea, index) => {
     const textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     textElement.setAttribute('x', x);
-    textElement.setAttribute('y', y + index * 10); // Ajusta el espaciado entre líneas
+    textElement.setAttribute('y', y + index * 10);
 
     // Dividir la línea en partes normales y partes en negrita
-    const partes = linea.split(/(\{.*?\})/); // Usar {} para marcar las partes en negrita
+    const partes = linea.split(/(\{.*?\})/);
     partes.forEach(parte => {
       if (parte.startsWith('{') && parte.endsWith('}')) {
-        // Parte en negrita (eliminar las llaves {})
+        // Parte en negrita
         const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
-        tspan.textContent = parte.slice(1, -1); // Eliminar las llaves {}
-        tspan.setAttribute('font-weight', 'bold'); // Aplicar negrita
+        tspan.textContent = parte.slice(1, -1);
+        tspan.setAttribute('font-weight', 'bold');
         textElement.appendChild(tspan);
       } else if (parte.trim() !== "") {
-        // Parte normal (ignorar partes vacías)
+        // Parte normal
         const tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
         tspan.textContent = parte;
         textElement.appendChild(tspan);
@@ -683,6 +718,7 @@ function agregarTextoMultilinea(texto, x, y, maxWidth, contenedor) {
     contenedor.appendChild(textElement);
   });
 }
+
   
       function generarSVG(empleado) {
         let svg = '';
