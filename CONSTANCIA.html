@@ -590,7 +590,7 @@ const Url = ofuscado();
                     const textoConstancia = `
     Quien suscribe, Directora de Gestión de Talento Humano de la Universidad Politécnica Territorial Puerto Cabello, 
     a través del presente hace constar que el ciudadano (a) {${empleadoEncontrado.Nombre}}, Titular de la Cédula de Identidad No. {${empleadoEncontrado.Cedula}}, presta servicio en esta institución como miembro del personal {${empleadoEncontrado.Categoria}}, Cargo {${empleadoEncontrado.Cargo}}, 
-    desde el {${empleadoEncontrado.Desde}}, percibiendo una remuneración mensual de: {${NumeroALetras(empleadoEncontrado.RemuneracionMensual)}} (Bs {${empleadoEncontrado.RemuneracionMensual}}).
+    desde el {${empleadoEncontrado.Desde}}, percibiendo una remuneración mensual de: (Bs {${empleadoEncontrado.RemuneracionMensual}}) en letras: {${NumeroALetras(empleadoEncontrado.RemuneracionMensual)}}.
 `;
 
                     // Agregar el texto al SVG
