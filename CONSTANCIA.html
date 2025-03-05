@@ -206,8 +206,8 @@ const Url = ofuscado();
                                 <p class="card-text"><strong>Serial:</strong> ${empleado.Codigo}</p>
                                 <p class="card-text"><strong>Nombre:</strong> ${empleado.Nombre}</p>
                                 <p class="card-text"><strong>Cédula:</strong> ${empleado.Cedula}</p>
-                                <p class="card-text"><strong>Tipo de Personal:</strong> ${empleado.TipoPersonal}</p>
                                 <p class="card-text"><strong>Categoría:</strong> ${empleado.Categoria}</p>
+                                <p class="card-text"><strong>Cargo:</strong> ${empleado.Cargo}</p>
                                 <p class="card-text"><strong>Tiempo:</strong> ${empleado.Tiempo}</p>
                                 <p class="card-text"><strong>Desde:</strong> ${empleado.Desde}</p>
                                 <p class="card-text"><strong>Remuneración Mensual:</strong> ${empleado.RemuneracionMensual}</p>
@@ -358,8 +358,8 @@ const Url = ofuscado();
                                 <h2 class="card-title">Empleado Encontrado</h2>
                                 <p class="card-text"><strong>Nombre:</strong> ${empleado.Nombre}</p>
                                 <p class="card-text"><strong>Cédula:</strong> ${empleado.Cedula}</p>
-                                <p class="card-text"><strong>Tipo de Personal:</strong> ${empleado.TipoPersonal}</p>
                                 <p class="card-text"><strong>Categoría:</strong> ${empleado.Categoria}</p>
+                                <p class="card-text"><strong>Cargo:</strong> ${empleado.Cargo}</p>
                                 <p class="card-text"><strong>Tiempo:</strong> ${empleado.Tiempo}</p>
                                 <p class="card-text"><strong>Desde:</strong> ${empleado.Desde}</p>
                                 <p class="card-text"><strong>Remuneración Mensual:</strong> ${empleado.RemuneracionMensual}</p>
@@ -589,12 +589,12 @@ const Url = ofuscado();
                     // Formatear el texto dinámicamente
                     const textoConstancia = `
     Quien suscribe, Directora de Gestión de Talento Humano de la Universidad Politécnica Territorial Puerto Cabello, 
-    a través del presente hace constar que el ciudadano (a) {${empleadoEncontrado.Nombre}}, Titular de la Cédula de Identidad No. {${empleadoEncontrado.Cedula}}, presta servicio en esta institución como miembro del personal {${empleadoEncontrado.TipoPersonal}}, categoría {${empleadoEncontrado.Categoria}} a {${empleadoEncontrado.Tiempo}}, 
+    a través del presente hace constar que el ciudadano (a) {${empleadoEncontrado.Nombre}}, Titular de la Cédula de Identidad No. {${empleadoEncontrado.Cedula}}, presta servicio en esta institución como miembro del personal {${empleadoEncontrado.Categoria}}, Cargo {${empleadoEncontrado.Cargo}}, 
     desde el {${empleadoEncontrado.Desde}}, percibiendo una remuneración mensual de: {${NumeroALetras(empleadoEncontrado.RemuneracionMensual)}} (Bs {${empleadoEncontrado.RemuneracionMensual}}).
 `;
 
                     // Agregar el texto al SVG
-                    agregarTextoMultilinea(textoConstancia, 5, 65, 450, contenidoDiv);
+                    agregarTextoMultilinea(textoConstancia, 5, 65, 500, contenidoDiv);
                 }, 0);
             } else {
                 // Manejar el caso donde no se encuentra el empleado
