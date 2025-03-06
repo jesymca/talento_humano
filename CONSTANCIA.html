@@ -118,12 +118,12 @@
   </div>
 </div>
 
-<div id="progressContainer"
-  style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center;">
-  <div style="background-color: white; padding: 20px; border-radius: 10px;">
-    Descargando...
-  </div>
+<div id="progressContainer" class="container mt-5" style="display:none;"> 
+  <div class="progress"> 
+     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div> 
+  </div> 
 </div>
+
   
     <div class="container">
       <div class="row">
@@ -258,50 +258,42 @@ const Url = ofuscado();
   
   
   
-  
-      function printDiv(nombreDiv) {
-        var contenido = document.getElementById(nombreDiv).innerHTML;
-        var contenidoOriginal = document.body.innerHTML;
-  
-        document.body.innerHTML = contenido;
-        window.print();
-        document.body.innerHTML = contenidoOriginal;
-  
-        // Reinicia la página después de imprimir
-        location.reload();
-      }
-  
-      function descargarPNG(nombreDiv) {
-        // Obtén el SVG del contenedor.
-        const svgElement = document.getElementById(nombreDiv).querySelector('svg');//<- busca la  etiqueta <svg> dentro  del contenedor
-  
-        if (!svgElement) {
-          console.error('No se encontró el elemento SVG.');
-          ocultarProgreso();
-          return;
-        }
-  
-  
-        //Obtener las dimensiones del SVG
-        const svgWidth = svgElement.viewBox.baseVal.width;
-        const svgHeight = svgElement.viewBox.baseVal.height;
-  
-        html2canvas(document.getElementById(nombreDiv),
-          {
-            allowTaint: false,
-            useCORS: true,
-            width: svgWidth, //<- establece el ancho del canvas
-            height: svgHeight, //<- establece el alto del  canvas
-            scale: 1.8, //<- valor de  escala. Experimentar con valores mayores si  es necesario.
-          })
-          .then(function (canvas) {
-            var link = document.createElement('a');
-            link.download = 'certificado.png';
-            link.href = canvas.toDataURL();
-            link.click();
-            ocultarProgreso()
-          });
-      }
+// PRINT  
+function printDiv(nombreDiv) {
+  var contenido = document.getElementById(nombreDiv).innerHTML;
+  var contenidoOriginal = document.body.innerHTML;
+
+  document.body.innerHTML = contenido;
+  window.print();
+  document.body.innerHTML = contenidoOriginal;
+
+  // Reinicia la página después de imprimir
+  location.reload();
+}
+
+// DESCARGAR PNG
+function descargarPNG(nombreDiv){
+ // Obtén el SVG del contenedor.
+ const svg = document.getElementById(nombreDiv).querySelector('svg');//<- busca la  etiqueta <svg> dentro  del contenedor
+    html2canvas(document.getElementById(nombreDiv),
+ {
+         allowTaint:  false,
+         useCORS:  true,
+         width: svg.width.baseVal.value, //<- establece el ancho del canvas
+         height: svg.height.baseVal.value, //<- establece el alto del  canvas
+         scale: 1.8, //<- valor de  escala. Experimentar con valores mayores si  es necesario.
+         })
+         .then(function(canvas)
+         {
+         var link = document.createElement('a');
+         link.download = 'Constancia.png';
+         link.href = canvas.toDataURL();
+         link.click();
+         ocultarProgreso()
+      });
+}
+
+
   
       // Agregar evento para convertir a mayúsculas al escribir
       const inputBusqueda = document.getElementById('busqueda');
@@ -841,11 +833,7 @@ function agregarTextoMultilinea(texto, x, y, maxWidth, contenedor) {
         </text><g class="text" id="contenido" transform="translate(0, 0)"</g>
         </text><g class="text" id="fecha" transform="translate(0, 0)"</g>
 
-
-
-
-
-    <image
+<image
 width="194.23421"
 height="27.580173"
 preserveAspectRatio="none"
@@ -855,7 +843,8 @@ x="8.129714"
 y="7.6764412"
 inkscape:label="MEMBRETE"
 inkscape:svg-dpi="96"><title
-id="title2">MEMBRETE</title></image>
+id="title2">MEMBRETE</title>
+</image>
 
 
 
