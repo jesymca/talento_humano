@@ -162,8 +162,14 @@ var imagenqr = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACHAAAAhwCAYAAABPzF
     // Agregar evento para convertir a mayúsculas al escribir
     const inputBusqueda = document.getElementById('busqueda');
     inputBusqueda.addEventListener('input', () => {
+      // Solo ocultar si el término de búsqueda ha cambiado
+      if (inputBusqueda.value.trim() !== ultimoTerminoBusqueda) {
+        document.getElementById('resultados').innerHTML = '';  // Limpiar resultados
+      }
       inputBusqueda.value = inputBusqueda.value.toUpperCase(); // Mantener mayúsculas
     });
+
+    let ultimoTerminoBusqueda = "";
   
     function NumeroALetras(num) {
       // [Tu función NumeroALetras aquí - SIN MODIFICACIONES]
@@ -359,7 +365,7 @@ var imagenqr = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACHAAAAhwCAYAAABPzF
   
       if (!terminoBusqueda) {
         resultadosDiv.innerHTML =
-          '<div class="alert alert-danger mt-3" role="alert"><i class="bi bi-exclamation-diamond"></i> Ingrese una cédula válida.</div>';
+          '<div class="alert alert-danger mt-3" role="alert"><i class="bi bi-exclamation-diamond"></i> Ingrese un numero de cédula o Serial válido.</div>';
         return; // Terminar la función si el campo de búsqueda está vacío
       }
   
