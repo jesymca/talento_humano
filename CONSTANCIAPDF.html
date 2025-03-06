@@ -116,22 +116,25 @@
       </style>
     </head>
     <body>
-    
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <label for="busqueda">
-            <p class="text-center">
-              Busca por <strong>Cédula (ej: V-12345678)</strong>:
-            </p>
-          </label>
-          <input class="input-busqueda" id="busqueda" placeholder="V-12345678" type="text" pattern="[^\s]+"
-                 oninput="this.value = this.value.replace(/\s/g, '');"/>
-          <button class="btn-buscar btn btn-primary" onclick="buscarEmpleado()"><i class="bi bi-search"></i> Buscar</button>
-          <div id="resultados"></div>
-        </div>
-      </div>
-    </div>
+
+        <div class="container">
+            <div class="row">
+              <div class="col">
+                <label for="busqueda">
+                  <p class="text-center">
+                    Busca por <strong>Cédula (ej: V-12345678)</strong>:
+                  </p>
+                </label>
+                <input class="input-busqueda" id="busqueda" placeholder="V-12345678" type="text" pattern="[^\s]+"
+                  oninput="this.value = this.value.replace(/\s/g, '');" />
+                <button class="btn-buscar" onclick="buscarEmpleado()"><i class="bi bi-search"></i> Buscar</button>
+                <div id="resultados"></div>
+              </div>
+            </div>
+          </div>
+
+
+
     
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.40/pdfmake.min.js"></script>
@@ -448,7 +451,7 @@ var imagenqr = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACHAAAAhwCAYAAABPzF
                   {
   text: [
   { text: "_       ", margin: [20, 0, 0, 0] },
-    "Quien suscribe, Directora de Gestión de Talento Humano de la Universidad Politécnica Territorial Puerto Cabello, a través del presente hace constar que el ciudadano (a) ",
+    "Quien suscribe, Directora de Gestión de Talento Humano de la Universidad Politécnica Territorial Puerto Cabello, a través del presente hace constar que el ciudadano (a). ",
     { text: nombre, bold: true }, // Nombre en negrita
     ", Titular de la Cédula de Identidad No. ",
     { text: cedula, bold: true }, // Cédula en negrita
