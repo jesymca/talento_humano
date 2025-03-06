@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redireccionando...</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Redireccionando a la página de Constancia de Trabajo...</h1>
+    <p>Si no es redirigido automáticamente, haga clic en el siguiente enlace:</p>
+    <a href="https://www.uptpc.edu.ve/talento-humano/constancia-trabajo">Ir a la página de Constancia de Trabajo</a>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        window.location.href = "https://www.uptpc.edu.ve/talento-humano/constancia-trabajo";
+      }, 3000); // Redirecciona después de 3 segundos (3000 milisegundos)
+    };
+  </script>
+</body>
+</html>
