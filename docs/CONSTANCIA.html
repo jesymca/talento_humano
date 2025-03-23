@@ -475,6 +475,11 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
               const desde = empleadoEncontrado.Desde;
               const remuneracionMensual = empleadoEncontrado.RemuneracionMensual;
               const codigo = empleadoEncontrado.Codigo;
+              const status = empleadoEncontrado.Status; // Obtener el valor de la columna Status
+
+                // Validar el valor de $validez según el estado
+                const validez = (status === 'Activo') ? "Valido por 90 Dias" : "";
+
               
     
                const remuneracionEnLetras = NumeroALetras(parseFloat(empleadoEncontrado.RemuneracionMensual.replace(',', '.')));
@@ -588,7 +593,7 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
                                 margin: [0, 2, 0, 0] // Márgenes: [izquierda, arriba, derecha, abajo]
                             },
                             {
-                                text: $validez,
+                                text: validez,
                                 alignment: 'center',
                                 fontSize: 8,
                                 margin: [0, 2, 0, 0] // Márgenes: [izquierda, arriba, derecha, abajo]
