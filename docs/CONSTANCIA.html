@@ -422,7 +422,7 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
         </div>
       </div>
       <button class="btn btn-success" onclick="generarPDF('${empleado.Cedula}')">
-        <i class="bi bi-file-earmark-text"></i> Generar Constancia PDF
+        <i class="bi bi-file-earmark-text"></i> Generar Constancia Bancaria PDF
       </button>
     `;
             } else {
@@ -478,7 +478,7 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
               const status = empleadoEncontrado.Status; // Obtener el valor de la columna Status
 
                 // Validar el valor de $validez según el estado
-                const validez = (status === 'ACTIVO') ? "Valido por 90 Dias" : "";
+                const validez = (status === 'JUBILADO') ? "" : "Valido por 90 Dias";
 
               
     
@@ -541,7 +541,6 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
     const margenLateral = 10; // Márgenes laterales
     const anchoTotal = 580 - 5 * margenLateral; // Ancho total de la página tamaño carta
     const anchoTexto = anchoTotal - 2 * anchoLogoQR; // Ancho para la columna del texto
-    const validez = "Valido por 90 Dias";
 
     return {
         stack: [ // Usamos un stack para organizar los elementos verticalmente
