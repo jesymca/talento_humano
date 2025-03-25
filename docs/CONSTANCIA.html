@@ -295,7 +295,7 @@ var imagenqr = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACHAAAAhwCAYAAABPzF
         // Formatear la fecha en el texto deseado
         //return `Constancia que se expide a solicitud de la parte interesada en la ciudad de PUERTO CABELLO, a los {${diasEnLetras}} días del mes de {${mes}} de {${año}}.`;
         return [
-            { text: "_       ", margin: [20, 0, 0, 0] },
+        { text: " ".repeat(10), margin: [20, 0, 0, 0] }, // Usa espacios invisibles ( )
             "Constancia que se expide a solicitud de la parte interesada en la ciudad de PUERTO CABELLO, a los ",
             { text: diasEnLetras, bold: true }, // Días en letras en negrita
             " días del mes de ",
@@ -493,7 +493,7 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
               const status = empleadoEncontrado.Status; // Obtener el valor de la columna Status
 
                 // Validar el valor de $validez según el estado
-                const validez = (status === 'JUBILADO') ? "" : "Valido por 90 Dias";
+                const validez = (status === 'JUBILADO') ? "" : "Valido por 30 Dias";
 
               
     
@@ -512,16 +512,18 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
           },
                   { text: 'CONSTANCIA DE TRABAJO', style: 'header' },
                   {
-  text: [
-  { text: "_       ", margin: [20, 0, 0, 0] },
-    "Quien suscribe, Directora de Gestión de Talento Humano de la Universidad Politécnica Territorial Puerto Cabello, a través del presente hace constar que el ciudadano (a). ",
+                    text: [
+  { text: " ".repeat(10), margin: [20, 0, 0, 0] }, // Usa espacios invisibles ( )
+    "Quien suscribe, la ",
+    { text: "MSc. AMELIA TERESA PADRON MORENO", bold: true }, // Nombre en negrita
+    " portadora de la Cédula de Identidad No.: ",
+    { text: "V-12108417", bold: true }, // Cédula en negrita
+    " en Caracter de Directora de Gestión de Talento Humano de la Universidad Politécnica Territorial Puerto Cabello, a través del presente hace constar que el ciudadano (a). ",
     { text: nombre, bold: true }, // Nombre en negrita
     ", Titular de la Cédula de Identidad No. ",
     { text: cedula, bold: true }, // Cédula en negrita
     ", presta servicio en esta institución como miembro del personal ",
     { text: categoria, bold: true }, // Categoría en negrita
-   // ", Cargo ",
-   // { text: cargo, bold: true }, // Cargo en negrita
     ", desde el ",
     { text: desde, bold: true }, // Desde en negrita
     ", percibiendo una remuneración mensual de: (Bs ",
@@ -529,7 +531,7 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
     ") en letras: ",
     { text: remuneracionEnLetras, bold: true }, // Remuneración en letras en negrita
     "."
-  ],
+],
   style: 'paragraph'
 },
 {
@@ -538,7 +540,6 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
     },
     
                     { text: `Serial: ${codigo}`, style: 'serial' },
-                    { text: 'DOCUMENTO VALIDO SOLO CON FIRMA Y SELLO HUMEDO', style: 'validez' },
 
 
                 ],
@@ -561,7 +562,7 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
         stack: [ // Usamos un stack para organizar los elementos verticalmente
             { // Texto superior centrado
                 text: [
-                    { text: "Msc./Lcda. Amelia Padron\n", bold: true },
+                    { text: "MSc. AMELIA TERESA PADRON MORENO\n", bold: true },
                     "Directora de Gestion y Talento Humano\n",
                     "Consejo de Gestion Universitario Nº CU-01/2024"
                 ],
@@ -616,6 +617,13 @@ const fechaCSV = new Date(anioCSV, mesCSV - 1, diaCSV); // Crear la fecha en UTC
                     }
                 ],
                 margin: [15, 0, 15, 0] // Márgenes: [izquierda, arriba, derecha, abajo]
+            },
+            // Nuevo texto en la parte inferior izquierda { text: 'DOCUMENTO VALIDO SOLO CON FIRMA Y SELLO HUMEDO', style: 'validez' },
+            {
+                text: "DOCUMENTO VALIDO SOLO CON FIRMA Y SELLO HUMEDO",
+                alignment: 'left',
+                style: 'validez',
+                margin: [15, 10, 0, 0] // Ajusta los márgenes según necesites
             }
         ],
         margin: [15, -180, 15, 0] // Márgenes generales: [izquierda, arriba, derecha, abajo]
